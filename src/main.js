@@ -1,7 +1,10 @@
+import '@splinetool/viewer'; // <--- AJOUTE CETTE LIGNE EN PREMIER
 import './styles/style.css'
 import gsap from 'gsap'
 import ScrollTrigger from 'gsap/ScrollTrigger'
 import LocomotiveScroll from 'locomotive-scroll'
+
+// ... le reste de ton code ne change pas ...
 
 // 1. Enregistrer le plugin
 gsap.registerPlugin(ScrollTrigger);

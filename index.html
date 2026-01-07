@@ -11,14 +11,21 @@
 
 <div data-scroll-container id="app">
 
-  <section data-scroll-section data-bgcolor="#FFF8E7">
-    <div class="hero-text" data-scroll data-scroll-speed="1">
-      <h1 class="reveal">TANGUY</h1>
-      <p style="font-size: 1.5rem; margin-top: 20px;">Mon portfolio...</p>
+  <section data-scroll-section data-bgcolor="#FFF8E7" style="height: 100vh; position: relative; overflow: hidden;">
+
+    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1;">
+      <iframe
+              src="https://my.spline.design/loopcopycopy-qpmFThRAAgPr2844xRqkl70v-cm4/"
+              frameborder="0"
+              width="100%"
+              height="100%"
+              style="border: none;">
+      </iframe>
     </div>
 
-    <div class="floating-card pos-1" data-scroll data-scroll-speed="2"></div>
-    <div class="floating-card pos-2" data-scroll data-scroll-speed="-1"></div>
+    <div class="hero-content" style="position: relative; z-index: 2; pointer-events: none; height: 100%; display: flex; align-items: center; justify-content: center;">
+    </div>
+
   </section>
 
   <section data-scroll-section data-bgcolor="#B5EAD7">
