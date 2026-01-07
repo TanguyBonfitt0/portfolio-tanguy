@@ -4,29 +4,46 @@
   <meta charset="UTF-8" />
   <link rel="icon" type="image/svg+xml" href="/vite.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Tanguy | Portfolio</title>
+  <title>Portfolio Créatif</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.css">
 </head>
 <body>
+
 <div data-scroll-container id="app">
 
-  <section class="hero" data-scroll-section>
-    <div class="hero-content" data-scroll data-scroll-speed="2">
+  <section data-scroll-section data-bgcolor="#FFF8E7">
+    <div class="hero-text" data-scroll data-scroll-speed="1">
       <h1 class="reveal">TANGUY</h1>
-      <p class="reveal">DÉVELOPPEUR CRÉATIF</p>
+      <p style="font-size: 1.5rem; margin-top: 20px;">Mon portfolio...</p>
     </div>
-    <div class="parallax-circle" data-scroll data-scroll-speed="-3"></div>
+
+    <div class="floating-card pos-1" data-scroll data-scroll-speed="2"></div>
+    <div class="floating-card pos-2" data-scroll data-scroll-speed="-1"></div>
   </section>
 
-  <section class="projects" data-scroll-section>
-    <h2 data-scroll data-scroll-speed="1">Mes Projets</h2>
-    <div class="project-grid">
-      <div class="project-card reveal">Projet 1</div>
-      <div class="project-card reveal">Projet 2</div>
+  <section data-scroll-section data-bgcolor="#B5EAD7">
+    <div style="text-align: center; z-index: 10;">
+      <h2 data-scroll data-scroll-speed="1">Mon Univers</h2>
+      <p style="max-width: 600px; font-size: 1.2rem; margin: 20px auto;">
+        J'aime quand le web est coloré, interactif et surprenant.
+      </p>
+    </div>
+    <div class="floating-card pos-3" data-scroll data-scroll-speed="3"></div>
+  </section>
+
+  <section data-scroll-section data-bgcolor="#FFB7B2">
+    <div style="display: flex; flex-direction: column; align-items: center;">
+      <h2 style="margin-bottom: 50px; color: white;">Mes Projets</h2>
+
+      <div class="project-container">
+        <div class="project-item" data-scroll data-scroll-speed="1">Projet A</div>
+        <div class="project-item" data-scroll data-scroll-speed="2" style="margin-top: 100px;">Projet B</div>
+      </div>
     </div>
   </section>
 
 </div>
+
 <script type="module" src="/src/main.js"></script>
 </body>
 </html>
