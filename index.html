@@ -3,10 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TANGUY - P0RTF0LI0</title>
+  <title>TANGUY — CREATIVE DEV</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.css">
 </head>
 <body>
+
+<div id="preloader">
+  <div class="loader-text">Installation du portfolio en cours...</div>
+  <div class="loader-bar"><div class="loader-progress"></div></div>
+</div>
 
 <div class="cursor-blob"></div>
 
@@ -14,11 +19,11 @@
   <a href="#" class="logo-text hover-trigger" onclick="location.reload()">TANGUY©</a>
 
   <nav class="menu-items">
-    <a href="#work" class="nav-link hover-trigger" data-scroll-to>WORK</a>
+    <a href="#work" class="nav-link hover-trigger" data-scroll-to>PROJETS</a>
     <a href="#contact" class="nav-link hover-trigger" data-scroll-to>CONTACT</a>
   </nav>
 
-  <button id="theme-btn" class="theme-toggle hover-trigger">☀︎</button>
+  <button id="theme-btn" class="theme-toggle hover-trigger">SOLEIL</button>
 </aside>
 
 <button id="back-to-top" class="back-to-top hover-trigger">↑</button>
@@ -27,37 +32,39 @@
 
   <section data-scroll-section class="hero-container">
     <div class="abstract-blob" data-scroll data-scroll-speed="2"></div>
+
     <div class="hero-titles">
-      <h1 data-scroll data-scroll-speed="1">Tanguy</h1>
+      <h1 data-scroll data-scroll-speed="1">TANGUY</h1>
       <h1 data-scroll data-scroll-speed="1.5" class="outline-text">PORTFOLIO</h1>
     </div>
+
     <div class="hero-footer">
-      (2026) — Creative Dev.<br>Paris, France.
+      (2026) — Creative Dev.<br>Tours, France.
     </div>
   </section>
 
   <section id="work" data-scroll-section class="work-section">
     <div style="margin-bottom: 80px;">
-      <span class="section-label">(SELECTED WORKS)</span>
+      <span class="section-label">MES PROJETS</span>
     </div>
 
     <a href="#" class="project-card hover-trigger">
       <div class="project-image-container">
-        <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2564&auto=format&fit=crop" class="project-image" data-scroll data-scroll-speed="-1" alt="Projet 1">
+        <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2564&auto=format&fit=crop" class="project-image" data-scroll data-scroll-speed="-1" alt="Mode Ecommerce">
       </div>
       <div class="project-info">
-        <h2 class="project-title">NEO FASHION</h2>
-        <span class="project-cat">E-Commerce</span>
+        <h2 class="project-title">PROJET 1</h2>
+        <span class="project-cat">Python</span>
       </div>
     </a>
 
     <a href="#" class="project-card hover-trigger">
       <div class="project-image-container">
-        <img src="https://images.unsplash.com/photo-1600607686527-6fb886090705?q=80&w=2700&auto=format&fit=crop" class="project-image" data-scroll data-scroll-speed="-1" alt="Projet 2">
+        <img src="https://images.unsplash.com/photo-1600607686527-6fb886090705?q=80&w=2700&auto=format&fit=crop" class="project-image" data-scroll data-scroll-speed="-1" alt="Architecture">
       </div>
       <div class="project-info">
-        <h2 class="project-title">ARCHI STUDIO</h2>
-        <span class="project-cat">WebGL Portfolio</span>
+        <h2 class="project-title">Projet 2</h2>
+        <span class="project-cat">Unity & C#</span>
       </div>
     </a>
   </section>
@@ -65,21 +72,20 @@
   <section id="contact" data-scroll-section class="footer-fullscreen">
     <h2 data-scroll data-scroll-speed="1" class="footer-title">LET'S WORK<br>TOGETHER</h2>
 
-    <form action="https://formspree.io/f/TON_ID_FORMSPREE" method="POST" class="contact-form">
-
+    <form id="contact-form" action="https://formspree.io/f/TON_ID_FORMSPREE" method="POST" class="contact-form">
       <div class="input-group">
         <input type="text" name="name" class="minimal-input hover-trigger" placeholder="Votre Nom" required>
       </div>
-
       <div class="input-group">
         <input type="email" name="email" class="minimal-input hover-trigger" placeholder="Votre Email" required>
       </div>
-
       <div class="input-group">
         <textarea name="message" class="minimal-input hover-trigger" rows="1" placeholder="Votre Projet..." required style="resize: none;"></textarea>
       </div>
 
       <button type="submit" class="submit-huge hover-trigger">SEND_</button>
+
+      <div id="form-status" style="margin-top: 20px; font-family: 'Syne'; opacity: 0; transition: opacity 0.5s;"></div>
     </form>
 
     <div class="footer-credits">

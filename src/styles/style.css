@@ -15,31 +15,46 @@
 }
 
 /* RESET & BASE */
+html.has-scroll-smooth { overflow: hidden; } /* Fix locomotive scroll */
+html, body { width: 100%; min-height: 100%; }
+
 body {
   background-color: var(--bg-color);
   color: var(--text-color);
   font-family: 'Manrope', sans-serif;
   margin: 0;
-  padding-left: var(--sidebar-width); /* Espace pour le menu gauche */
+  padding-left: var(--sidebar-width);
   transition: background-color 0.5s ease, color 0.5s ease;
-  cursor: none; /* Curseur custom */
+  cursor: none;
   overflow-x: hidden;
+  /* Cache le scroll natif tant que JS n'a pas pris le relais */
 }
 
 /* GRAIN */
 body::before {
   content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
-  pointer-events: none; z-index: 9999;
+  pointer-events: none; z-index: 999;
 }
 
-/* --- SIDEBAR (PC) --- */
+/* --- PRELOADER --- */
+#preloader {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  background: var(--bg-color); z-index: 99999;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+.loader-text { font-family: 'Syne'; margin-bottom: 20px; font-weight: bold; }
+.loader-bar { width: 200px; height: 2px; background: rgba(128,128,128,0.2); overflow: hidden; }
+.loader-progress { width: 0%; height: 100%; background: var(--text-color); transition: width 0.1s; }
+
+/* --- SIDEBAR --- */
 .sidebar {
   position: fixed; top: 0; left: 0;
   width: var(--sidebar-width); height: 100vh;
   border-right: 1px solid rgba(128,128,128,0.2);
   display: flex; flex-direction: column; justify-content: space-between; align-items: center;
-  padding: 40px 0; z-index: 100;
+  padding: 40px 0; z-index: 1000; /* Z-Index élevé */
   background-color: var(--bg-color);
   transition: background-color 0.5s ease;
 }
@@ -51,7 +66,6 @@ body::before {
 }
 
 .menu-items { display: flex; flex-direction: column; gap: 40px; }
-
 .nav-link {
   font-family: 'Syne', sans-serif; writing-mode: vertical-rl; transform: rotate(180deg);
   text-decoration: none; color: var(--text-color); opacity: 0.6; transition: 0.3s;
@@ -64,7 +78,7 @@ body::before {
   cursor: none; color: var(--text-color); font-size: 1.2rem; transition: 0.3s;
 }
 
-/* --- TYPOGRAPHIE & ELEMENTS --- */
+/* --- UI ELEMENTS --- */
 h1 { font-family: 'Syne'; font-size: clamp(3rem, 13vw, 15rem); line-height: 0.9; text-transform: uppercase; margin: 0; color: var(--text-color); mix-blend-mode: exclusion; }
 .outline-text { -webkit-text-stroke: 2px var(--text-color); color: transparent !important; }
 
@@ -79,11 +93,11 @@ body.hovered .cursor-blob { width: 80px; height: 80px; background: white; }
   position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px;
   background: var(--text-color); color: var(--bg-color); border: none; border-radius: 50%;
   display: flex; align-items: center; justify-content: center; font-size: 1.5rem;
-  cursor: none; z-index: 90; opacity: 0; pointer-events: none; transform: translateY(20px); transition: 0.4s;
+  cursor: none; z-index: 900; opacity: 0; pointer-events: none; transform: translateY(20px); transition: 0.4s;
 }
 .back-to-top.visible { opacity: 1; pointer-events: auto; transform: translateY(0); }
 
-/* --- HERO --- */
+/* --- SECTIONS --- */
 .hero-container { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; position: relative; padding: 0 5vw; }
 .hero-titles { text-align: center; mix-blend-mode: difference; z-index: 2; }
 .hero-footer { position: absolute; bottom: 40px; left: 0; font-weight: 600; }
@@ -95,90 +109,59 @@ body.hovered .cursor-blob { width: 80px; height: 80px; background: white; }
 }
 @keyframes float { 0%, 100% { transform: translate(-50%, -50%) scale(1); } 50% { transform: translate(-40%, -60%) scale(1.2); } }
 
-/* --- PROJETS --- */
 .work-section { padding: 100px 5vw; }
 .section-label { font-family: 'Syne'; color: var(--accent-color); font-size: 1.5rem; }
 .project-card { display: block; text-decoration: none; color: var(--text-color); margin-bottom: 120px; }
-.project-image-container { width: 100%; height: 60vh; overflow: hidden; position: relative; border-radius: 4px; }
+.project-image-container { width: 100%; height: 60vh; overflow: hidden; position: relative; border-radius: 4px; background: #ccc; }
 .project-image { width: 100%; height: 120%; object-fit: cover; }
 .project-info { display: flex; justify-content: space-between; align-items: flex-end; margin-top: 20px; border-bottom: 2px solid var(--text-color); padding-bottom: 20px; }
 .project-title { font-family: 'Syne'; font-size: 2.5rem; margin: 0; text-transform: uppercase; }
 .project-cat { font-family: 'Syne'; font-size: 1.2rem; }
 
-/* --- FOOTER FORM --- */
+/* --- FOOTER --- */
 .footer-fullscreen { min-height: 100vh; background: var(--text-color); color: var(--bg-color); display: flex; flex-direction: column; justify-content: center; padding: 5vw; position: relative; }
 .footer-title { font-size: clamp(3rem, 10vw, 8rem); color: white; text-transform: uppercase; line-height: 1; margin-bottom: 50px; }
 .contact-form { width: 100%; max-width: 800px; }
-.minimal-input { width: 100%; background: transparent; border: none; border-bottom: 1px solid #555; color: white; padding: 20px 0; font-size: 1.5rem; outline: none; margin-bottom: 40px; font-family: 'Syne'; }
+.minimal-input {
+  width: 100%; background: transparent; border: none; border-bottom: 1px solid #555;
+  color: var(--bg-color); padding: 20px 0; font-size: 1.5rem; outline: none; margin-bottom: 40px; font-family: 'Syne';
+}
 .minimal-input:focus { border-bottom-color: var(--accent-color); }
 .submit-huge { font-family: 'Syne'; font-size: clamp(3rem, 8vw, 6rem); background: none; border: none; color: white; cursor: none; text-align: left; padding: 0; transition: color 0.3s; }
 .submit-huge:hover { color: var(--accent-color); }
 .footer-credits { position: absolute; bottom: 20px; right: 20px; opacity: 0.5; font-size: 0.8rem; }
 
-
-/* ========================================= */
-/* RESPONSIVE MOBILE (IMPORTANT)       */
-/* ========================================= */
+/* --- MOBILE --- */
 @media (max-width: 768px) {
-
-  /* 1. Reset Body */
   body {
-    padding-left: 0; /* Plus de menu gauche */
-    padding-top: 70px; /* Place pour le header */
-    cursor: auto; /* Curseur normal sur mobile */
+    padding-left: 0;
+    padding-top: 70px;
+    cursor: auto;
   }
-
-  /* Cacher le custom cursor sur mobile */
   .cursor-blob { display: none; }
 
-  /* 2. Sidebar devient Header */
   .sidebar {
-    width: 100%;
-    height: 60px;
-    flex-direction: row; /* Horizontal */
-    border-right: none;
-    border-bottom: 1px solid rgba(128,128,128,0.2);
-    padding: 0 20px;
-    justify-content: space-between;
+    width: 100%; height: 70px; /* Hauteur fixe header */
+    flex-direction: row; border-right: none; border-bottom: 1px solid rgba(128,128,128,0.2);
+    padding: 0 20px; justify-content: space-between; box-sizing: border-box;
   }
 
-  .logo-text, .nav-link {
-    writing-mode: horizontal-tb; /* Texte horizontal */
-    transform: none;
-    font-size: 1rem;
-  }
+  .logo-text, .nav-link { writing-mode: horizontal-tb; transform: none; font-size: 1rem; }
+  .menu-items { flex-direction: row; gap: 20px; }
 
-  .menu-items {
-    flex-direction: row;
-    gap: 20px;
-  }
+  h1 { font-size: 18vw; }
+  .hero-container { padding: 0 20px; min-height: 80vh; }
+  .abstract-blob { width: 80vw; height: 80vw; }
 
-  /* 3. Ajustements Tailles */
-  h1 { font-size: 18vw; } /* Titres plus petits */
-
-  .hero-container {
-    padding: 0 20px;
-    min-height: 80vh;
-  }
-
-  .abstract-blob {
-    width: 80vw; height: 80vw; /* Blob plus gros sur mobile */
-  }
-
-  /* 4. Projets */
   .work-section { padding: 60px 20px; }
   .project-image-container { height: 40vh; }
   .project-title { font-size: 1.5rem; }
   .project-info { flex-direction: column; align-items: flex-start; gap: 10px; }
 
-  /* 5. Footer */
   .footer-fullscreen { padding: 20px; }
   .footer-title { font-size: 3rem; }
   .minimal-input { font-size: 1.2rem; }
   .submit-huge { font-size: 3rem; }
 
-  .back-to-top {
-    bottom: 20px; right: 20px;
-    width: 40px; height: 40px;
-  }
+  .back-to-top { bottom: 20px; right: 20px; width: 40px; height: 40px; }
 }
